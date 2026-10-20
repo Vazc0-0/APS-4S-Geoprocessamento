@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>sortsat · Monitor de Ordenação</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+<header class="topo">
+  <div class="marca">
+    <div class="marca-pixels" aria-hidden="true">
+      <span style="background:#7A2E1F"></span><span style="background:#DB7B33"></span><span style="background:#E9B949"></span>
+      <span style="background:#DB7B33"></span><span style="background:#D9DB6A"></span><span style="background:#93C557"></span>
+      <span style="background:#D9DB6A"></span><span style="background:#4E9E45"></span><span style="background:#1F6B3A"></span>
+    </div>
+    <span class="marca-nome">sortsat</span>
+    <span class="marca-sub">/ monitor de ordenação</span>
+  </div>
+  <nav class="menu" aria-label="Principal">
+    <a href="#analise" class="ativo">Análise</a>
+    <a href="#comparar">Comparar todos</a>
+    <a href="#relatorio">Relatório</a>
+  </nav>
+</header>
+
+<main class="conteudo">
+
+  <section class="barra" id="analise" aria-label="Parâmetros da análise">
+    <div class="campo">
+      <span class="campo-rotulo">Método</span>
+      <div class="segmentos" role="group" aria-label="Método" id="grupo-metodo"></div>
+    </div>
+    <div class="campo">
+      <span class="campo-rotulo">Tamanho da cena</span>
+      <div class="segmentos" role="group" aria-label="Tamanho" id="grupo-tamanho"></div>
+    </div>
+    <div class="campo">
+      <span class="campo-rotulo">Cenário</span>
+      <div class="segmentos" role="group" aria-label="Cenário" id="grupo-cenario"></div>
+    </div>
+    <button type="button" class="botao-principal" id="executar">Executar análise</button>
+  </section>
+
+  <p class="aviso" id="aviso" hidden></p>
+
+  <div class="layout">
+    <section class="coluna-principal">
+      <div class="titulo-cena">
+        <h1 id="titulo">Escolha o método, o tamanho e o cenário</h1>
+        <span class="mono suave" id="pasta"></span>
+      </div>
+
+      <div class="paineis">
+        <figure class="painel">
+          <figcaption><span>1 · Entrada</span><span class="mono suave" id="rotulo-entrada">arquivo original</span></figcaption>
+          <div class="mapa" id="mapa-antes"></div>
+        </figure>
+        <figure class="painel">
+          <figcaption><span id="titulo-faixas">2 · Distribuição</span><span class="mono suave">8 faixas</span></figcaption>
+          <div class="faixas" id="faixas"></div>
+        </figure>
+        <figure class="painel">
+          <figcaption><span>3 · Saída</span><span class="mono suave">ordenado</span></figcaption>
+          <div class="mapa" id="mapa-depois"></div>
+        </figure>
+      </div>
+
+      <div class="legenda mono">
+        <span>menor valor</span>
+        <div class="rampa" id="rampa"></div>
+        <span>maior valor</span>
+        <span class="mais-suave">· 200 pixels amostrados da cena, cada pixel é um registro</span>
+      </div>
+
+      <section class="painel" id="comparar" aria-labelledby="titulo-comparar">
+        <div class="cabecalho-painel">
+          <h2 id="titulo-comparar">Os 3 métodos na mesma cena</h2>
+          <button type="button" class="botao-secundario" id="botao-comparar">Comparar no arquivo aleatório</button>
+        </div>
+        <p class="suave pequeno" id="info-comparar">Roda Insertion, Merge e Bucket no mesmo arquivo aleatório do tamanho escolhido. Barras em escala logarítmica.</p>
+        <div id="barras-comparar"></div>
+      </section>
+    </section>
+
+    <aside class="coluna-lateral">
+      <div class="metricas">
+        <div class="metrica"><span class="suave">Tempo médio</span><strong class="mono" id="m-tempo">—</strong></div>
+        <div class="metrica"><span class="suave">Complexidade</span><strong class="mono destaque" id="m-complexidade">—</strong></div>
+        <div class="metrica"><span class="suave">Comparações</span><strong class="mono" id="m-comparacoes">—</strong></div>
+        <div class="metrica"><span class="suave">Movimentações</span><strong class="mono" id="m-movimentacoes">—</strong></div>
+      </div>
+
+      <article class="painel relatorio" id="relatorio">
+        <div class="selo" id="selo" hidden><span class="ponto"></span><span id="veredito"></span></div>
+        <h2 id="relatorio-titulo">Relatório</h2>
+        <div id="relatorio-texto"><p class="suave">O relatório aparece aqui depois da execução.</p></div>
+        <div class="acoes">
+          <button type="button" class="botao-contorno" id="baixar-pdf" disabled>Baixar PDF</button>
+        </div>
+      </article>
+
+      <div class="painel">
+        <h2 class="pequeno-titulo">Antes e depois (20 primeiros)</h2>
+        <p class="mono pequeno"><span class="suave">antes:</span> <span id="lista-antes">—</span></p>
+        <p class="mono pequeno"><span class="suave">depois:</span> <span id="lista-depois">—</span></p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="carregando" id="carregando" hidden>
+  <div class="carregando-caixa" role="status" aria-live="polite">
+    <span class="girando" aria-hidden="true"></span>
+    <span id="carregando-texto">Ordenando…</span>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

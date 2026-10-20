@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Iniciar sistema",
+      "request": "launch",
+      "mainClass": "br.unip.aps.App",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "vmArgs": "-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8"
+    },
+    {
+      "type": "java",
+      "name": "Verificar algoritmos",
+      "request": "launch",
+      "mainClass": "br.unip.aps.ferramentas.VerificarAlgoritmos",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "vmArgs": "-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8"
+    }
+  ]
+}

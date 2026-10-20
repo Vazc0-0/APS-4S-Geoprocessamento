@@ -1,0 +1,9 @@
+bin/
+out/
+*.class
+
+dados/*
+!dados/LEIA-ME.md
+
+.DS_Store
+Thumbs.db
