@@ -7,6 +7,11 @@ A tela segue o tema de geoprocessamento: cada arquivo é tratado como uma "cena"
 - **Backend:** Java puro (JDK 17+). Sem Maven, Spring ou bibliotecas externas: o servidor HTTP é o que já vem no JDK (`com.sun.net.httpserver`) e o JSON é gerado à mão.
 - **Frontend:** HTML, CSS e JavaScript puros, na pasta `frontend`.
 
+### Demonstração
+
+https://github.com/user-attachments/assets/c45a256f-eeeb-4557-9b52-a0bdfd0868e8
+
+
 ---
 
 ## Sumário
